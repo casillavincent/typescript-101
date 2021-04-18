@@ -1,2 +1,5 @@
-# typescript-101
+# TypeScript
+
 My notes for learning TypeScript
+
+---
