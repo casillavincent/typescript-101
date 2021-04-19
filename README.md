@@ -327,6 +327,183 @@ const combineNames = combine("Vincent", "Casilla");
 console.log(combineNames); // expect an VincentCasilla
 ```
 
+---
+
+### **Literal Types**
+
+---
+
+> When you have a specific number eg. 3 is a number but 3.5 is a specific type of number
+
+An example of using a Literal Type is to add a third parameter for converting the input to either a string or a number
+
+```typescript
+const combine = (input1: number | string, input2: number | string, resultConversion: string) => {
+   let result;
+
+   if (typeof input1 === "number" && typeof input2 === "number") {
+      result = input1 + input2;
+   } else {
+      result = input1.toString() + input2.toString();
+   }
+
+   // Checks that the third parameter is a number otherwise it will be converted to a string
+   if (resultConversion === "as-number") {
+      return +result;
+   } else {
+      return result.toString();
+   }
+   return result;
+};
+```
+
+Adding the Union Type with the Literal Type
+
+```typescript
+const combine = (
+   input1: number | string,
+   input2: number | string,
+   resultConversion: "as-number" | "as-text"
+) => {
+   let result;
+
+   if (
+      (typeof input1 === "number" && typeof input2 === "number") ||
+      resultConversion === "as-number"
+   ) {
+      result = +input1 + +input2;
+   } else {
+      result = input1.toString() + input2.toString();
+   }
+
+   // Checks that the third parameter is a number otherwise it will be converted to a string
+   if (resultConversion === "as-number") {
+      return +result;
+   } else {
+      return result.toString();
+   }
+   return result;
+};
+
+// Call them
+const combineAges = combine(10, 10, "as-number");
+const combineNames = combine("Vincent", "Casilla", "as-text");
+
+console.log(combineAges); // expect 20
+console.log(combineNames); // expect an VincentCasilla
+```
+
+---
+
+### **Type Alias**
+
+---
+
+```typescript
+/*
+-------------------------------
+    Type Alias
+-------------------------------
+*/
+type Adder = number | string;
+type AdderResultType = "as-number" | "as-text";
+// Replace values where type is needed
+```
+
+---
+
+<br markdown='1'>
+<br markdown='1'>
+
+# Function Return Types and Voids
+
+> When you hover on the function, TS will infer what type will be returned
+
+```typescript
+const add = (n1: number, n2: number) => {
+   return n1 + n2;
+};
+
+// TS will infer  it will return a void
+// It's not returning anything
+const printResult = (num: number) => {
+   console.log("Result: " + num);
+};
+```
+
+Will return "void" not native to JS
+
+### What is Void?
+
+---
+
+-  This function doesnt have a return statement or doesnt return anything. It doesn't yield any errors
+-  Void is the standard practice
+-  undefined also works (a valid type) but rarely used
+
+```typescript
+// TS will infer  it will return a void
+const printResult = (num: number): void => {
+   console.log("Result: " + num);
+};
+```
+
+---
+
+### **Function Type**
+
+---
+
+> combineValues points to add function so you are able to call combineValues(2, 2) which is the same as add(2, 2)
+
+```typescript
+const add = (n1: number, n2: number) => {
+   return n1 + n2;
+};
+
+// TS will infer  it will return a void
+const printResult = (num: number): void => {
+   console.log("Result: " + num);
+};
+
+let combineValues;
+combineValues = add;
+console.log(combineValues(2, 2));
+// This works because combineValues is pointing to the function (this is Vanilla Javascript)
+```
+
+> The Basics of Function Types
+
+```typescript
+// Make it clear that what is stored here is a function
+let combineValues: Function;
+combineValues = add;
+combineValues = printResult;
+console.log(combineValues(5, 5));
+```
+
+> How to write a Function Type
+
+```typescript
+const add = (n1: number, n2: number) => {
+   return n1 + n2;
+};
+
+// TS will infer  it will return a void
+const printResult = (num: number): void => {
+   console.log("Result: " + num);
+};
+
+// This is how to create a function type
+// This says "ensure the function returns a number and accept 2 paraters where they are numbers"
+let combineValues: (a: number, b: number) => number;
+combineValues = add;
+combineValues = printResult;
+
+console.log(combineValues(5, 5)); // expect 10
+console.log(combineValues(15)); // an error because it needs 2 parameters
+```
+
 <aside markdown="1">
-<p style="padding: 10px; background: #58A642; text-align: center;color: white; font-weight: bold; font-size: 1.5em">More Info coming</p>
+<p style="padding: 10px; background: #292D3F; text-align: center;color: white; font-weight: bold; font-size: 1.5em">More Info coming</p>
 </aside>
