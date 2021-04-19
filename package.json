@@ -1,0 +1,23 @@
+{
+  "name": "typescript-101",
+  "version": "1.0.0",
+  "description": "Notes for TypeScript",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/casillavincent/typescript-101.git"
+  },
+  "author": "Vincent Casilla",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/casillavincent/typescript-101/issues"
+  },
+  "homepage": "https://github.com/casillavincent/typescript-101#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
