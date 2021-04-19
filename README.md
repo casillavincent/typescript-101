@@ -1,6 +1,7 @@
 # TypeScript
 
-## Notes for learning TypeScript
+### My notes for learning TypeScript
+For Educational Purposes Only
 
 ---
 
