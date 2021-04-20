@@ -1,3 +1,4 @@
+"use strict";
 /*
 -------------------------------
     Numbers
@@ -27,7 +28,7 @@ var result = add(number1, number2);
 var user = {
     name: "Vincent",
     age: 25,
-    role: "Front-end Developer"
+    role: "Front-end Developer",
 };
 // Doesnt create a new object but it's a specialized object type and provide the structural information
 // Stripped out ot JS code

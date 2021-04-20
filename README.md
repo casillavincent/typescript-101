@@ -1,6 +1,7 @@
 # TypeScript
 
 ### My notes for learning TypeScript
+
 For Educational Purposes Only
 
 ---
@@ -114,6 +115,9 @@ $ npm start
 1. Tuple (This doesnt exist in Vanilla Javascript)
 1. Enum - adds numeric identifier to a human readable identifier
 1. Any - makes it any type
+1. Function Type
+1. Unknown Type
+1. Never Type
 
 This will convert number 2 into a string (expected output = 52)
 <br markdown='1'>
@@ -505,6 +509,125 @@ console.log(combineValues(5, 5)); // expect 10
 console.log(combineValues(15)); // an error because it needs 2 parameters
 ```
 
-<aside markdown="1">
-<p style="padding: 10px; background: #292D3F; text-align: center;color: white; font-weight: bold; font-size: 1.5em">More Info coming</p>
-</aside>
+> Syntax Below
+
+```typescript
+// This works too - this means that the assigned value needs to be any function
+let consoleInput: Function;
+
+// Specify the type of parameters and output
+let consoleInput02: (x: number, y: number) => number;
+```
+
+---
+
+### Unknown Type
+
+---
+
+> Unknown because we dont know yet what the assigned value will be (can put any types without errors)
+
+#### Why does it work? Why is it different from any type?
+
+-  Can hold any value because it doesn't know the type (unknown is more strict)
+-  Any is more flexible
+-  Use unknown when theres no set type yet
+-  Don't use all the time
+   > This will cause an error!
+
+```typescript
+let myName: unknown;
+let firstName: string;
+
+firstName = myName;
+```
+
+> This will not cause an error!
+
+```typescript
+let myName: any;
+let firstName: string;
+
+firstName = myName;
+```
+
+---
+
+### Never Type
+
+---
+
+> Never returns anything, it's meant to break the script
+> Most commonly used when throwing errors
+
+```typescript
+const generateError = (message: string, code: number) => {
+   throw { message: message, errorCode: code };
+};
+generateError("Error Occured", 600);
+```
+
+<br markdown='1'>
+
+---
+
+<br markdown='1'>
+
+# Compiler
+
+## How to automate TypeScript to look for changes in the file
+
+This is good for 1 TS file
+
+```
+$ tsc name_of_file.ts --watch
+```
+
+OR
+
+```
+$ tsc name_of_file.ts -w
+```
+
+## How to Automate Globally
+
+For more than 1 file
+
+> Without pointing to a file use this code in Terminal
+
+```
+$ tsc --init
+```
+
+Then
+
+```
+$ tsc
+```
+
+OR
+
+```
+$ tsc -w
+$ tsc --watch
+```
+
+-  You will get a tsconfig.json
+-  This will make TS compile globally
+
+## How to add an exclude in tsconfig.json
+
+Example
+
+-  Node Modules is excluded by default
+-  Can use include too which is opposite and only compile what's in the include
+-  If using together, do exclude then include ==> it will filter down
+
+```json
+"exclude" : [
+    "basics.ts",
+    "functions.ts",
+    "scripts/scripts-ts.ts"
+
+  ]
+```
