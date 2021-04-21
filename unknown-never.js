@@ -4,14 +4,14 @@
       Unknown
 --------------------------------
 */
-var myName;
-var firstName;
+let myName;
+let firstName;
 /*
 --------------------------------
       Never
 --------------------------------
 */
-var generateError = function (message, code) {
+const generateError = (message, code) => {
     throw { message: message, errorCode: code };
 };
 generateError("Error Occured", 600);
